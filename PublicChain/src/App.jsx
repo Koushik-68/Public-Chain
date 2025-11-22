@@ -15,6 +15,7 @@ import AllProjects from "./pages/Admin/AllProjects";
 import FundRequests from "./pages/Admin/FundRequests";
 import Feedback from "./pages/Admin/Feedback";
 import PendingRegistrations from "./pages/Admin/PendingRegistrations";
+import PublicBlockchain from "./pages/public/PublicBlockchain";
 
 import "./index.css";
 import Admin from "./pages/Admin/Admin";
@@ -80,6 +81,8 @@ function App() {
               path="/admin/pending-registrations"
               element={<PendingRegistrations />}
             />
+            // Example only – depends on your router setup
+            <Route path="/public/blockchain" element={<PublicBlockchain />} />
             <Route path="/dashboard" element={<DepartmentDashboard />} />
             <Route path="/department/add-project" element={<AddProject />} />
             <Route

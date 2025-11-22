@@ -3,6 +3,7 @@ import {
   FaFolderOpen,
   FaMapMarkedAlt,
   FaCommentDots,
+  FaLink,
 } from "react-icons/fa";
 
 export default function Sidebar({ active = "Dashboard" }) {
@@ -49,6 +50,11 @@ export default function Sidebar({ active = "Dashboard" }) {
           active={active === "Submit Feedback"}
           href="/public/submit-feedback"
         />
+        <SidebarButton
+          label="Blockchain Explorer"
+          active={active === "Blockchain Explorer"}
+          href="/public/blockchain"
+        />
       </nav>
     </aside>
   );
@@ -64,6 +70,8 @@ function SidebarButton({ label, active, href }) {
     icon = <FaMapMarkedAlt className="w-5 h-5 mr-3 text-indigo-400" />;
   } else if (label === "Submit Feedback") {
     icon = <FaCommentDots className="w-5 h-5 mr-3 text-yellow-400" />;
+  } else if (label === "Blockchain Explorer") {
+    icon = <FaLink className="w-5 h-5 mr-3 text-purple-400" />;
   }
   return (
     <a
