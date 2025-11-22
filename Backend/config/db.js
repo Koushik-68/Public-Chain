@@ -33,6 +33,25 @@ async function init() {
     connectionLimit: 10,
   });
 
+  // Ensure 'fund_chain' table exists for blockchain blocks
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS fund_chain (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      block_hash VARCHAR(128) NOT NULL,
+      prev_hash VARCHAR(128),
+      fund_data JSON NOT NULL,
+      signature TEXT,
+      timestamp BIGINT NOT NULL
+    ) ENGINE=InnoDB;
+  `);
+
+  // Ensure timestamp column is BIGINT (in case table already exists)
+  try {
+    await pool.query(`ALTER TABLE fund_chain MODIFY timestamp BIGINT NOT NULL`);
+  } catch (err) {
+    // Ignore error if column is already BIGINT or table doesn't exist yet
+  }
+
   // Ensure 'users' table exists (verified_at column already present)
   await pool.query(`
     CREATE TABLE IF NOT EXISTS users (
@@ -133,6 +152,8 @@ async function init() {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB;
   `);
+
+  // ...existing code...
 
   // Test connection
   try {

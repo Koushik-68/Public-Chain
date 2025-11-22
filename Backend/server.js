@@ -12,8 +12,10 @@ app.use(express.urlencoded({ extended: true }));
 // Mount routes
 const authRoutes = require("./routes/authRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const fundChainRoutes = require("./routes/fundChainRoutes");
 app.use("/api", authRoutes);
 app.use("/api", projectRoutes);
+app.use("/api", fundChainRoutes);
 
 // Basic route
 app.get("/", (req, res) => res.send("Node.js server is running 🚀"));
