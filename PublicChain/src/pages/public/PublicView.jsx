@@ -51,7 +51,7 @@ export default function PublicView() {
     // Total Projects
     <svg
       key="icon-0"
-      className="w-8 h-8 text-blue-500"
+      className="w-8 h-8 text-sky-700"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -63,7 +63,7 @@ export default function PublicView() {
     // Funds Allocated
     <svg
       key="icon-1"
-      className="w-8 h-8 text-green-500"
+      className="w-8 h-8 text-emerald-700"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -76,7 +76,7 @@ export default function PublicView() {
     // Ongoing
     <svg
       key="icon-2"
-      className="w-8 h-8 text-indigo-500"
+      className="w-8 h-8 text-indigo-700"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -89,7 +89,7 @@ export default function PublicView() {
     // Verified on Blockchain
     <svg
       key="icon-3"
-      className="w-8 h-8 text-yellow-500"
+      className="w-8 h-8 text-amber-600"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -124,84 +124,100 @@ export default function PublicView() {
 
   // ---- JSX Part ----
   return (
-    <div className="min-h-screen w-full flex flex-row">
+    <div className="min-h-screen w-full flex flex-row bg-slate-100">
       <Sidebar active="Dashboard" />
-      <main className="flex-1 flex flex-col items-center justify-start py-12 px-8 bg-gradient-to-br from-[#e9eafc] to-[#f3f6ff]">
+      <main className="flex-1 flex flex-col items-center justify-start py-10 px-8">
         <div className="w-full max-w-6xl">
-          <h2 className="text-3xl font-bold text-[#16213E] mb-6">
-            Welcome to PublicChain – Empowering Citizens through Transparency
-          </h2>
+          {/* Page Header */}
+          <header className="mb-8 border-b border-slate-200 pb-4">
+            <h2 className="text-3xl font-semibold text-slate-900 tracking-tight">
+              PublicChain – Public Project Transparency Portal
+            </h2>
+            <p className="mt-2 text-sm text-slate-600 max-w-3xl">
+              A unified view of public works, funds allocation, and blockchain
+              verified projects for citizens.
+            </p>
+          </header>
 
           {/* Search Bar */}
-          <div className="mb-8 flex flex-col md:flex-row gap-4 items-center justify-center">
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search projects, updates..."
-              className="w-full md:w-1/2 px-4 py-2 rounded-2xl border-2 border-blue-200 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-800 bg-white"
-            />
+          <div className="mb-8 flex flex-col md:flex-row gap-4 items-center justify-between">
+            <div className="w-full md:w-1/2">
+              <label className="text-xs font-medium text-slate-600 uppercase tracking-wide">
+                Search Projects
+              </label>
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search by project name or description"
+                className="mt-1 w-full px-4 py-2 rounded-lg border border-slate-300 bg-white shadow-sm focus:outline-none focus:ring-1 focus:ring-sky-600 focus:border-sky-600 text-slate-800 text-sm"
+              />
+            </div>
           </div>
-
-          {/* Section Divider */}
-          <div className="w-full border-b-2 border-blue-100 mb-8"></div>
 
           {/* Overview Cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            {stats.map((stat, i) => (
-              <div
-                key={i}
-                className="bg-gradient-to-br from-blue-50 to-white rounded-3xl shadow-xl p-6 flex flex-col items-center justify-center border-2 border-blue-100 hover:scale-105 transition-transform group"
-              >
-                <div className="mb-2">{icons[i]}</div>
-                <span
-                  className={`text-2xl font-extrabold mb-1 ${
-                    i === 1
-                      ? "text-green-600"
-                      : i === 2
-                      ? "text-indigo-600"
-                      : i === 3
-                      ? "text-yellow-500"
-                      : "text-blue-600"
-                  }`}
+          <section className="mb-10">
+            <h3 className="text-sm font-semibold text-slate-700 mb-4 uppercase tracking-wide">
+              Key Indicators
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {stats.map((stat, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col items-start justify-between hover:shadow-md transition-shadow"
                 >
-                  {stat.value}
-                </span>
-                <span className="text-base text-gray-700 font-semibold group-hover:text-blue-700 transition-colors text-center">
-                  {stat.label}
-                </span>
-              </div>
-            ))}
-          </div>
-
-          {/* Section Divider */}
-          <div className="w-full border-b-2 border-blue-100 mb-8"></div>
+                  <div className="mb-4 rounded-full bg-slate-50 p-2">
+                    {icons[i]}
+                  </div>
+                  <span
+                    className={`text-2xl font-semibold mb-1 ${
+                      i === 1
+                        ? "text-emerald-700"
+                        : i === 2
+                        ? "text-indigo-700"
+                        : i === 3
+                        ? "text-amber-700"
+                        : "text-slate-900"
+                    }`}
+                  >
+                    {stat.value}
+                  </span>
+                  <span className="text-xs text-slate-600 font-medium">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
 
           {/* Latest Updates Section */}
-          <div className="mb-12">
-            <h3 className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
-              <svg
-                className="w-7 h-7 text-indigo-400"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
-              </svg>
-              Latest Updates
-            </h3>
+          <section className="mb-12">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
+                <svg
+                  className="w-5 h-5 text-sky-700"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" />
+                </svg>
+                Latest Project Updates
+              </h3>
+            </div>
+
             {/* Department Filter for Updates */}
-            <div className="mb-4 flex gap-2 items-center">
-              <label className="font-semibold text-blue-700">
+            <div className="mb-4 flex flex-wrap gap-3 items-center text-sm">
+              <label className="font-medium text-slate-700">
                 Filter by Department:
               </label>
               <select
                 value={selectedDepartment}
                 onChange={(e) => setSelectedDepartment(e.target.value)}
-                className="px-2 py-1 rounded border border-blue-200 bg-white text-gray-800"
+                className="px-3 py-1.5 rounded-md border border-slate-300 bg-white text-slate-800 text-sm focus:outline-none focus:ring-1 focus:ring-sky-600"
               >
-                <option value="">All</option>
+                <option value="">All Departments</option>
                 {departmentLabels.map((dept) => (
                   <option key={dept} value={dept}>
                     {dept}
@@ -210,7 +226,7 @@ export default function PublicView() {
               </select>
               {selectedDepartment && (
                 <button
-                  className="px-2 py-1 rounded border border-blue-200 bg-white text-blue-700 font-semibold"
+                  className="px-3 py-1.5 rounded-md border border-slate-300 bg-slate-50 text-sky-700 font-medium text-xs hover:bg-slate-100"
                   onClick={() => setSelectedDepartment("")}
                   title="Clear department filter"
                 >
@@ -218,21 +234,22 @@ export default function PublicView() {
                 </button>
               )}
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredUpdates.length === 0 ? (
-                <div className="col-span-full text-blue-300">
+                <div className="col-span-full text-sm text-slate-500">
                   No recent updates found.
                 </div>
               ) : (
                 filteredUpdates.map((u, i) => (
                   <div
                     key={i}
-                    className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl shadow-lg p-5 flex flex-col gap-2 border-2 border-indigo-100 hover:scale-105 transition-transform"
+                    className="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex flex-col gap-2 hover:shadow-md transition-shadow"
                   >
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="flex items-center gap-2 text-lg font-semibold text-blue-700">
+                    <div className="flex justify-between items-start mb-1">
+                      <span className="flex items-center gap-2 text-base font-semibold text-slate-900">
                         <svg
-                          className="w-5 h-5 text-blue-400"
+                          className="w-4 h-4 text-sky-700"
                           fill="none"
                           stroke="currentColor"
                           strokeWidth="2"
@@ -243,17 +260,23 @@ export default function PublicView() {
                         </svg>
                         {u.project_name}
                       </span>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-slate-500">
                         {u.start_date}
                       </span>
                     </div>
-                    <span className="text-gray-700">{u.description}</span>
-                    <div className="flex gap-2 text-xs text-gray-500">
-                      <span>Department: {u.department_id}</span>
-                      <span>Status: {u.status}</span>
+                    <span className="text-sm text-slate-700 line-clamp-3">
+                      {u.description}
+                    </span>
+                    <div className="flex flex-wrap gap-3 text-[11px] text-slate-600 mt-1">
+                      <span className="px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200">
+                        Department: {u.department_id}
+                      </span>
+                      <span className="px-2 py-0.5 rounded-full bg-slate-50 border border-slate-200">
+                        Status: {u.status}
+                      </span>
                     </div>
                     <button
-                      className="mt-2 px-4 py-1 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold shadow hover:scale-105 transition-transform"
+                      className="mt-3 inline-flex items-center justify-center px-4 py-1.5 rounded-md bg-sky-700 text-white text-xs font-medium shadow-sm hover:bg-sky-800"
                       onClick={() => setSelectedUpdate(u)}
                     >
                       View Details
@@ -265,22 +288,22 @@ export default function PublicView() {
 
             {/* Project Details Modal */}
             {selectedUpdate && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-                <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-lg w-full border border-blue-400/30 relative animate-fade-in text-blue-900">
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                <div className="bg-white rounded-xl shadow-2xl p-6 max-w-lg w-full border border-slate-200 relative text-slate-900">
                   <button
-                    className="absolute top-3 right-3 text-blue-700 hover:text-red-400 text-2xl font-bold"
+                    className="absolute top-3 right-3 text-slate-500 hover:text-red-500 text-xl font-bold"
                     onClick={() => setSelectedUpdate(null)}
                     title="Close"
                   >
                     ×
                   </button>
-                  <h2 className="text-xl font-bold text-blue-900 mb-4 text-center">
+                  <h2 className="text-lg font-semibold text-slate-900 mb-4 text-center">
                     Project Details
                   </h2>
-                  <table className="w-full text-sm text-blue-900 border-separate border-spacing-y-2">
+                  <table className="w-full text-sm text-slate-800 border-separate border-spacing-y-2">
                     <tbody>
                       <tr>
-                        <td className="font-semibold">Project Name</td>
+                        <td className="font-semibold w-1/3">Project Name</td>
                         <td>{selectedUpdate.project_name}</td>
                       </tr>
                       <tr>
@@ -328,7 +351,7 @@ export default function PublicView() {
                         </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold">Description</td>
+                        <td className="font-semibold align-top">Description</td>
                         <td>{selectedUpdate.description}</td>
                       </tr>
                     </tbody>
@@ -336,137 +359,108 @@ export default function PublicView() {
                 </div>
               </div>
             )}
-          </div>
-
-          {/* Section Divider */}
-          <div className="w-full border-b-2 border-blue-100 mb-8"></div>
+          </section>
 
           {/* Charts Row */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Fund Distribution by Department */}
-            <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl p-6 border-2 border-blue-100">
-              <h4 className="text-lg font-bold text-indigo-700 mb-4 flex items-center gap-2">
-                <svg
-                  className="w-6 h-6 text-blue-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M3 7h18M3 12h18M3 17h18" />
-                </svg>
-                Fund Distribution by Department
-              </h4>
-              <div className="flex items-end h-32 gap-4">
-                {departmentValues.length === 0 ? (
-                  <div className="text-gray-400 text-sm">
-                    No department data available
-                  </div>
-                ) : (
-                  departmentValues.map((v, i) => (
-                    <div key={i} className="flex flex-col items-center">
-                      <div
-                        className={`w-8 rounded-t-xl ${
-                          [
-                            "bg-blue-400",
-                            "bg-green-400",
-                            "bg-indigo-400",
-                            "bg-yellow-400",
-                            "bg-pink-400",
-                            "bg-orange-400",
-                            "bg-teal-400",
-                            "bg-gray-400",
-                          ][i % 8]
-                        }`}
-                        style={{ height: `${Math.max(20, v * 10)}px` }}
-                      ></div>
-                      <span className="text-xs text-gray-500 mt-2">
-                        {departmentLabels[i]}
-                      </span>
+          <section className="mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Fund Distribution by Department */}
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h4 className="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2 uppercase tracking-wide">
+                  <svg
+                    className="w-4 h-4 text-sky-700"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M3 7h18M3 12h18M3 17h18" />
+                  </svg>
+                  Fund Distribution by Department
+                </h4>
+                <div className="flex items-end h-40 gap-4">
+                  {departmentValues.length === 0 ? (
+                    <div className="text-sm text-slate-500">
+                      No department data available.
                     </div>
-                  ))
-                )}
-              </div>
-            </div>
-
-            {/* Top Budget Project */}
-            <div className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl shadow-xl p-6 border-2 border-indigo-100">
-              <h4 className="text-lg font-bold text-indigo-700 mb-4 flex items-center gap-2">
-                <svg
-                  className="w-6 h-6 text-indigo-400"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v4l3 3" />
-                </svg>
-                Top Budget Project
-              </h4>
-              <div className="flex flex-col items-center justify-center h-32">
-                {projects.length > 0 ? (
-                  (() => {
-                    const topProject = [...projects].sort(
-                      (a, b) => parseFloat(b.budget) - parseFloat(a.budget)
-                    )[0];
-                    return (
-                      <div className="text-center">
-                        <div className="font-bold text-lg text-indigo-700 mb-2">
-                          {topProject.project_name}
-                        </div>
-                        <div className="text-sm text-gray-700">
-                          <b>
-                            Budget:<u>₹{topProject.budget}</u>{" "}
-                          </b>
-                        </div>
-                        <div className="text-sm text-gray-700">
-                          <b> Department: {topProject.department_id}</b>
-                        </div>
+                  ) : (
+                    departmentValues.map((v, i) => (
+                      <div key={i} className="flex flex-col items-center">
+                        <div
+                          className={`w-8 rounded-t-md ${
+                            [
+                              "bg-sky-600",
+                              "bg-emerald-600",
+                              "bg-indigo-600",
+                              "bg-amber-600",
+                              "bg-pink-500",
+                              "bg-orange-500",
+                              "bg-teal-600",
+                              "bg-slate-500",
+                            ][i % 8]
+                          }`}
+                          style={{ height: `${Math.max(20, v * 10)}px` }}
+                        ></div>
+                        <span className="text-[11px] text-slate-600 mt-2 text-center">
+                          {departmentLabels[i]}
+                        </span>
                       </div>
-                    );
-                  })()
-                ) : (
-                  <div className="text-gray-400">No data</div>
-                )}
+                    ))
+                  )}
+                </div>
+              </div>
+
+              {/* Top Budget Project */}
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                <h4 className="text-sm font-semibold text-slate-900 mb-4 flex items-center gap-2 uppercase tracking-wide">
+                  <svg
+                    className="w-4 h-4 text-indigo-700"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 8v4l3 3" />
+                  </svg>
+                  Top Budget Project
+                </h4>
+                <div className="flex flex-col items-center justify-center h-40">
+                  {projects.length > 0 ? (
+                    (() => {
+                      const topProject = [...projects].sort(
+                        (a, b) => parseFloat(b.budget) - parseFloat(a.budget)
+                      )[0];
+                      return (
+                        <div className="text-center">
+                          <div className="font-semibold text-base text-slate-900 mb-1">
+                            {topProject.project_name}
+                          </div>
+                          <div className="text-sm text-slate-700 mb-1">
+                            <b>
+                              Budget: <u>₹{topProject.budget}</u>
+                            </b>
+                          </div>
+                          <div className="text-sm text-slate-700">
+                            <b>Department: {topProject.department_id}</b>
+                          </div>
+                        </div>
+                      );
+                    })()
+                  ) : (
+                    <div className="text-sm text-slate-500">No data.</div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Section Divider */}
-          <div className="w-full border-b-2 border-blue-100 mb-8"></div>
+          </section>
 
           {/* Call to Action & Feedback */}
-          <div className="mt-12 flex flex-col items-center">
-            <h3 className="text-2xl font-bold text-green-700 mb-2 flex items-center gap-2">
-              <svg
-                className="w-7 h-7 text-green-400"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M9 12l2 2l4-4" />
-              </svg>
-              Transparency Matters
-            </h3>
-            <p className="text-gray-700 mb-4 text-center max-w-xl">
-              All verified projects are recorded on the blockchain for public
-              audit. Click below to explore transparency reports and verify
-              project authenticity.
-            </p>
-            <div className="flex gap-4">
-              <button
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2"
-                onClick={() =>
-                  window.open(
-                    "https://www.google.com/search?q=blockchain+transparency+reports",
-                    "_blank"
-                  )
-                }
-              >
+          <section className="mt-10 border-t border-slate-200 pt-8">
+            <div className="flex flex-col items-center text-center">
+              <h3 className="text-xl font-semibold text-emerald-800 mb-2 flex items-center gap-2">
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-6 h-6 text-emerald-700"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -474,62 +468,90 @@ export default function PublicView() {
                 >
                   <path d="M9 12l2 2l4-4" />
                 </svg>
-                Verify on Blockchain
-              </button>
-              <button
-                className="px-8 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-green-600 text-white font-bold shadow-lg hover:scale-105 transition-transform flex items-center gap-2"
-                onClick={() => navigate("/public/submit-feedback")}
-              >
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
+                Transparency & Public Accountability
+              </h3>
+              <p className="text-sm text-slate-700 mb-4 max-w-xl">
+                All verified projects are recorded on the blockchain for public
+                audit. Use the options below to explore transparency reports or
+                share your feedback as a citizen.
+              </p>
+              <div className="flex flex-wrap gap-4 justify-center">
+                <button
+                  className="px-6 py-2.5 rounded-md bg-slate-900 text-white text-sm font-medium shadow-sm hover:bg-black inline-flex items-center gap-2"
+                  onClick={() =>
+                    window.open(
+                      "https://www.google.com/search?q=blockchain+transparency+reports",
+                      "_blank"
+                    )
+                  }
                 >
-                  <path d="M12 20h9" />
-                  <path d="M12 4v16" />
-                </svg>
-                Submit Feedback
-              </button>
-            </div>
-            {showFeedback && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-                <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border border-blue-400/30 relative animate-fade-in text-blue-900">
-                  <button
-                    className="absolute top-3 right-3 text-blue-700 hover:text-red-400 text-2xl font-bold"
-                    onClick={() => setShowFeedback(false)}
-                    title="Close"
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
                   >
-                    ×
-                  </button>
-                  <h2 className="text-xl font-bold text-blue-900 mb-4 text-center">
-                    Submit Feedback
-                  </h2>
-                  <form
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      setShowFeedback(false);
-                      alert("Thank you for your feedback!");
-                    }}
+                    <path d="M9 12l2 2l4-4" />
+                  </svg>
+                  Verify on Blockchain
+                </button>
+                <button
+                  className="px-6 py-2.5 rounded-md bg-sky-700 text-white text-sm font-medium shadow-sm hover:bg-sky-800 inline-flex items-center gap-2"
+                  onClick={() => navigate("/public/submit-feedback")}
+                >
+                  <svg
+                    className="w-5 h-5 text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
                   >
-                    <textarea
-                      className="w-full p-2 border rounded mb-4"
-                      rows={4}
-                      placeholder="Your feedback..."
-                      required
-                    />
-                    <button
-                      type="submit"
-                      className="w-full py-2 rounded bg-blue-600 text-white font-bold"
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </div>
+                    <path d="M12 20h9" />
+                    <path d="M12 4v16" />
+                  </svg>
+                  Submit Feedback
+                </button>
               </div>
-            )}
-          </div>
+
+              {showFeedback && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                  <div className="bg-white rounded-xl shadow-2xl p-6 max-w-md w-full border border-slate-200 relative text-slate-900">
+                    <button
+                      className="absolute top-3 right-3 text-slate-500 hover:text-red-500 text-xl font-bold"
+                      onClick={() => setShowFeedback(false)}
+                      title="Close"
+                    >
+                      ×
+                    </button>
+                    <h2 className="text-lg font-semibold text-slate-900 mb-4 text-center">
+                      Submit Feedback
+                    </h2>
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        setShowFeedback(false);
+                        alert("Thank you for your feedback!");
+                      }}
+                    >
+                      <textarea
+                        className="w-full p-2 border border-slate-300 rounded-md mb-4 text-sm focus:outline-none focus:ring-1 focus:ring-sky-600"
+                        rows={4}
+                        placeholder="Your feedback..."
+                        required
+                      />
+                      <button
+                        type="submit"
+                        className="w-full py-2.5 rounded-md bg-sky-700 text-white font-medium text-sm hover:bg-sky-800"
+                      >
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
         </div>
       </main>
     </div>

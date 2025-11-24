@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../../axios/api";
 import AdminSidebar from "../../components/Admin/AdminSidebar";
-// import Modal from "../../components/Modal"; // Not used now
 
 export default function PendingRegistrations() {
   const [pending, setPending] = useState([]);
@@ -55,21 +54,28 @@ export default function PendingRegistrations() {
   }
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen w-screen bg-[#f5f6fa] text-gray-900 font-sans overflow-x-hidden">
+      {/* Sidebar (fixed width) */}
       <AdminSidebar />
-      <div className="flex-1 flex flex-col items-center justify-start">
-        <div className="w-full max-w-4xl p-4 md:p-8">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-bold text-indigo-300 mb-4 text-center">
+
+      {/* Main Area – takes all remaining width */}
+      <div className="flex-1 flex flex-col">
+        {/* Page content wrapper */}
+        <div className="w-full px-4 md:px-8 py-6">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-6 border-b border-gray-200 pb-3">
+            <h2 className="text-2xl font-semibold text-[#0A3A67]">
               Pending Registrations
             </h2>
             <button
-              className="px-8 py-3 rounded-xl bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold shadow-lg hover:scale-105 transition-all border border-green-400/40 text-lg"
+              className="px-4 md:px-6 py-2 rounded border border-[#0A3A67] bg-[#0A3A67] text-white text-sm md:text-base font-medium hover:bg-[#0c467f] focus:outline-none"
               onClick={fetchPending}
             >
               <span className="inline-flex items-center gap-2">
                 <svg
-                  className="w-6 h-6"
+                  className={`w-4 h-4 md:w-5 md:h-5 ${
+                    loading ? "animate-spin" : ""
+                  }`}
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -86,60 +92,62 @@ export default function PendingRegistrations() {
             </button>
           </div>
 
+          {/* Status / error message */}
           {message && (
             <div
-              className={`mb-6 p-4 rounded-xl shadow-lg border-l-4 ${
+              className={`mb-6 p-3 rounded border-l-4 text-sm ${
                 message.includes("Verified")
-                  ? "bg-green-900/40 border-green-500 text-green-300"
-                  : "bg-red-900/40 border-red-500 text-red-300"
+                  ? "bg-green-50 border-green-600 text-green-800"
+                  : "bg-red-50 border-red-600 text-red-800"
               }`}
             >
-              <div className="text-sm font-medium">{message}</div>
+              <div className="font-medium">{message}</div>
             </div>
           )}
 
+          {/* Content */}
           {loading ? (
-            <div className="text-center py-8 text-indigo-300">
+            <div className="text-center py-8 text-gray-700">
               Loading registrations...
             </div>
           ) : pending.length === 0 ? (
-            <div className="text-center py-6 text-gray-400 border border-dashed border-gray-600 rounded-lg">
+            <div className="text-center py-6 text-gray-600 border border-dashed border-gray-300 rounded bg-white">
               <p>
                 All clear! No pending registrations currently require
                 verification.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 py-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 py-4">
               {pending.map((u) => (
                 <div
                   key={u.id}
-                  className="bg-indigo-800/60 rounded-xl shadow-lg p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-indigo-900/80 transition-all border border-indigo-500/30 min-h-[180px] min-w-[180px]"
+                  className="bg-white border border-gray-200 rounded-md p-4 flex flex-col cursor-pointer hover:bg-[#f1f4f8] transition-colors"
                   onClick={() => {
                     setSelected(u);
                     setModalOpen(true);
                   }}
                 >
-                  <div className="font-bold text-lg text-indigo-200 mb-2 truncate w-full text-center">
+                  <div className="font-semibold text-sm md:text-base text-[#0A3A67] mb-1 truncate">
                     {u.department_name}
                   </div>
-                  <div className="text-indigo-300 text-sm mb-1">
+                  <div className="text-gray-700 text-xs mb-1">
                     {u.department_type}
                   </div>
-                  <div className="text-indigo-400 text-xs mb-1">
+                  <div className="text-gray-600 text-xs mb-1">
                     {u.state}, {u.district}
                   </div>
-                  <div className="text-indigo-400 text-xs mb-1">
+                  <div className="text-gray-600 text-xs mb-1">
                     Head: {u.head_name}
                   </div>
-                  <div className="text-indigo-400 text-xs mb-1">{u.email}</div>
-                  <div className="text-indigo-400 text-xs">
+                  <div className="text-gray-600 text-xs mb-1">{u.email}</div>
+                  <div className="text-gray-500 text-xs">
                     {u.created_at
                       ? new Date(u.created_at).toLocaleDateString()
                       : "N/A"}
                   </div>
                   <div className="mt-3">
-                    <span className="inline-block px-3 py-1 rounded bg-green-700/40 text-green-300 text-xs font-semibold">
+                    <span className="inline-block px-3 py-1 rounded bg-[#fff5e5] text-[#a36b00] text-xs font-semibold border border-[#f0d19c]">
                       Pending
                     </span>
                   </div>
@@ -147,78 +155,95 @@ export default function PendingRegistrations() {
               ))}
             </div>
           )}
+        </div>
 
-          {modalOpen && selected && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-              <div className="bg-indigo-950 rounded-xl shadow-2xl p-8 w-full max-w-lg relative">
+        {/* Modal */}
+        {modalOpen && selected && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+            <div className="bg-white rounded-md shadow-md p-6 w-full max-w-lg relative border border-gray-300">
+              <button
+                className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold focus:outline-none"
+                onClick={() => {
+                  setModalOpen(false);
+                  setSelected(null);
+                }}
+              >
+                &times;
+              </button>
+              <h3 className="text-lg font-semibold text-[#0A3A67] mb-4 text-center">
+                Registration Details
+              </h3>
+              <table className="w-full text-xs md:text-sm text-left border-separate border-spacing-y-2">
+                <tbody>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top w-1/3">
+                      Department Name
+                    </td>
+                    <td className="text-gray-700">
+                      {selected.department_name}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      Type
+                    </td>
+                    <td className="text-gray-700">
+                      {selected.department_type}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      State
+                    </td>
+                    <td className="text-gray-700">{selected.state}</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      District
+                    </td>
+                    <td className="text-gray-700">{selected.district}</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      Head
+                    </td>
+                    <td className="text-gray-700">{selected.head_name}</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      Email
+                    </td>
+                    <td className="text-gray-700">{selected.email}</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      Contact
+                    </td>
+                    <td className="text-gray-700">{selected.contact_number}</td>
+                  </tr>
+                  <tr>
+                    <td className="font-medium text-gray-800 pr-3 align-top">
+                      Registered At
+                    </td>
+                    <td className="text-gray-700">
+                      {selected.created_at
+                        ? new Date(selected.created_at).toLocaleString()
+                        : "N/A"}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="flex justify-center mt-6">
                 <button
-                  className="absolute top-4 right-4 text-indigo-300 hover:text-white text-xl font-bold"
-                  onClick={() => {
-                    setModalOpen(false);
-                    setSelected(null);
-                  }}
+                  className="px-4 md:px-6 py-2 rounded border border-[#0A3A67] bg-[#0A3A67] text-white text-sm md:text-base font-medium hover:bg-[#0c467f] focus:outline-none"
+                  onClick={() => verify(selected.id)}
                 >
-                  &times;
+                  Verify &amp; Generate
                 </button>
-                <h3 className="text-lg font-bold text-indigo-200 mb-4 text-center">
-                  Registration Details
-                </h3>
-                <table className="w-full text-base text-left border-separate border-spacing-y-2">
-                  <tbody>
-                    <tr>
-                      <td className="font-bold text-indigo-300">
-                        Department Name
-                      </td>
-                      <td>{selected.department_name}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">Type</td>
-                      <td>{selected.department_type}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">State</td>
-                      <td>{selected.state}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">District</td>
-                      <td>{selected.district}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">Head</td>
-                      <td>{selected.head_name}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">Email</td>
-                      <td>{selected.email}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">Contact</td>
-                      <td>{selected.contact_number}</td>
-                    </tr>
-                    <tr>
-                      <td className="font-bold text-indigo-300">
-                        Registered At
-                      </td>
-                      <td>
-                        {selected.created_at
-                          ? new Date(selected.created_at).toLocaleString()
-                          : "N/A"}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="flex justify-center mt-6">
-                  <button
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold shadow hover:scale-105 transition border border-green-400/40 text-base"
-                    onClick={() => verify(selected.id)}
-                  >
-                    Verify & Generate
-                  </button>
-                </div>
               </div>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -25,27 +25,23 @@ export default function AllProjects() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white">
+    <div className="flex min-h-screen bg-[#f5f6fa] text-gray-900 font-sans">
       <AdminSidebar />
 
-      <div className="flex-1 relative">
-        {/* soft glow backgrounds */}
-        <div className="pointer-events-none absolute -top-10 right-10 h-40 w-40 rounded-full bg-indigo-400/20 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-16 h-52 w-52 rounded-full bg-blue-500/20 blur-3xl" />
-
-        <div className="flex-1 flex flex-col items-center justify-start pt-16 pb-10">
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col items-center justify-start pt-8 pb-10">
           <div className="w-full max-w-5xl px-4 md:px-8">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 border-b border-gray-200 pb-3">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-2xl bg-blue-500/20 border border-blue-400/50 shadow-lg shadow-blue-500/40">
-                  <FaProjectDiagram className="text-blue-200 text-2xl" />
+                <div className="p-3 rounded bg-[#0A3A67] text-white flex items-center justify-center">
+                  <FaProjectDiagram className="text-xl" />
                 </div>
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-blue-100 tracking-wide">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-[#0A3A67]">
                     All Projects
                   </h2>
-                  <p className="text-xs md:text-sm text-blue-200/80 mt-1">
+                  <p className="text-xs md:text-sm text-gray-600 mt-1">
                     List of all registered public projects with budget and
                     status.
                   </p>
@@ -53,7 +49,7 @@ export default function AllProjects() {
               </div>
 
               <button
-                className="px-6 md:px-8 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold shadow-lg hover:scale-105 transition-all border border-blue-400/60 text-sm md:text-lg inline-flex items-center gap-2"
+                className="px-4 md:px-6 py-2 rounded border border-[#0A3A67] bg-[#0A3A67] text-white text-sm md:text-base font-medium hover:bg-[#0c467f] focus:outline-none inline-flex items-center gap-2"
                 onClick={fetchProjectsAdmin}
               >
                 <FaSyncAlt className={loadingProjects ? "animate-spin" : ""} />
@@ -63,22 +59,22 @@ export default function AllProjects() {
 
             {/* Content */}
             {loadingProjects ? (
-              <div className="text-center py-10 text-blue-300 text-lg">
+              <div className="text-center py-10 text-gray-700 text-sm md:text-base">
                 Loading projects...
               </div>
             ) : projects.length === 0 ? (
-              <div className="text-center py-10 text-gray-400 border border-dashed border-gray-600 rounded-2xl bg-slate-900/70">
-                <p className="text-base">No projects found.</p>
+              <div className="text-center py-10 text-gray-600 border border-dashed border-gray-300 rounded bg-white">
+                <p className="text-sm md:text-base">No projects found.</p>
                 <p className="text-xs mt-1 text-gray-500">
                   Once departments add projects, they will appear here.
                 </p>
               </div>
             ) : (
-              <div className="bg-slate-950/80 border border-blue-500/30 rounded-2xl shadow-xl overflow-hidden">
-                <div className="px-6 py-3 border-b border-blue-500/30 flex items-center justify-between">
-                  <span className="text-sm text-blue-100/80">
+              <div className="bg-white border border-gray-200 rounded-md">
+                <div className="px-4 md:px-6 py-3 border-b border-gray-200 flex items-center justify-between text-sm">
+                  <span className="text-gray-700">
                     Total projects:{" "}
-                    <span className="font-bold text-blue-50">
+                    <span className="font-semibold text-[#0A3A67]">
                       {projects.length}
                     </span>
                   </span>
@@ -87,42 +83,70 @@ export default function AllProjects() {
                   className="overflow-x-auto"
                   style={{ maxHeight: "70vh", overflowY: "auto" }}
                 >
-                  <table className="w-full text-sm md:text-base text-left border-separate border-spacing-y-2 min-w-[1100px] mx-auto">
-                    <thead>
-                      <tr className="bg-blue-900/70 text-blue-100 text-sm md:text-base">
-                        <th className="px-6 py-4 rounded-l-xl">Project Name</th>
-                        <th className="px-6 py-4">Department</th>
-                        <th className="px-6 py-4">Type</th>
-                        <th className="px-6 py-4">Location</th>
-                        <th className="px-6 py-4">Budget</th>
-                        <th className="px-6 py-4">Status</th>
-                        <th className="px-6 py-4">Start</th>
-                        <th className="px-6 py-4 rounded-r-xl">End</th>
+                  <table className="w-full text-xs md:text-sm text-left border border-gray-300 border-collapse min-w-[1100px]">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Project Name
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Department
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Type
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Location
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Budget
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Status
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Start
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          End
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
                       {projects.map((p) => (
                         <tr
                           key={p.id}
-                          className="bg-slate-800/80 text-blue-50 hover:bg-blue-900/40 transition-all cursor-pointer"
+                          className="bg-white hover:bg-[#f1f4f8] cursor-pointer"
                           onClick={() => setSelectedProject(p)}
                           title="View details"
                         >
-                          <td className="px-6 py-4 font-semibold truncate max-w-[260px]">
+                          <td className="px-3 md:px-4 py-2 border border-gray-300 font-medium truncate max-w-[260px]">
                             {p.project_name}
                           </td>
-                          <td className="px-6 py-4">{p.department_id}</td>
-                          <td className="px-6 py-4">{p.type}</td>
-                          <td className="px-6 py-4">
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            {p.department_id}
+                          </td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            {p.type}
+                          </td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
                             <span className="inline-flex items-center gap-1">
-                              <FaMapMarkerAlt className="text-blue-300" />
+                              <FaMapMarkerAlt className="text-gray-600" />
                               <span>{p.location}</span>
                             </span>
                           </td>
-                          <td className="px-6 py-4">₹{p.budget}</td>
-                          <td className="px-6 py-4">{p.status}</td>
-                          <td className="px-6 py-4">{p.start_date}</td>
-                          <td className="px-6 py-4">{p.end_date}</td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            ₹{p.budget}
+                          </td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            {p.status}
+                          </td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            {p.start_date}
+                          </td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            {p.end_date}
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -134,75 +158,93 @@ export default function AllProjects() {
 
           {/* Modal for project details */}
           {selectedProject && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-              <div className="bg-slate-950 rounded-2xl shadow-2xl p-8 max-w-lg w-full border border-blue-400/40 relative animate-fade-in text-blue-50">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+              <div className="bg-white rounded-md p-6 max-w-lg w-full border border-gray-300 relative">
                 <button
-                  className="absolute top-3 right-3 text-blue-200 hover:text-red-400 text-2xl font-bold"
+                  className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold focus:outline-none"
                   onClick={() => setSelectedProject(null)}
                   title="Close"
                 >
                   ×
                 </button>
-                <h2 className="text-xl font-bold text-blue-100 mb-4 text-center flex items-center justify-center gap-2">
-                  <FaProjectDiagram className="text-blue-300" />
+                <h2 className="text-lg font-semibold text-[#0A3A67] mb-4 text-center flex items-center justify-center gap-2">
+                  <FaProjectDiagram className="text-gray-700" />
                   Project Details
                 </h2>
-                <div className="border border-blue-500/30 rounded-xl p-4 bg-slate-900/80">
-                  <table className="w-full text-xs md:text-sm text-blue-50 border-separate border-spacing-y-2">
+                <div className="border border-gray-200 rounded-md p-4 bg-[#f9fafb]">
+                  <table className="w-full text-xs md:text-sm border-separate border-spacing-y-2">
                     <tbody>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top w-1/3">
                           Project Name
                         </td>
-                        <td>{selectedProject.project_name}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.project_name}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Department
                         </td>
-                        <td>{selectedProject.department_id}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.department_id}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Type
                         </td>
-                        <td>{selectedProject.type}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.type}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Location
                         </td>
-                        <td>{selectedProject.location}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.location}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Budget
                         </td>
-                        <td>₹{selectedProject.budget}</td>
+                        <td className="text-gray-700">
+                          ₹{selectedProject.budget}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Status
                         </td>
-                        <td>{selectedProject.status}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.status}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Start Date
                         </td>
-                        <td>{selectedProject.start_date}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.start_date}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           End Date
                         </td>
-                        <td>{selectedProject.end_date}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.end_date}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-blue-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Description
                         </td>
-                        <td>{selectedProject.description}</td>
+                        <td className="text-gray-700">
+                          {selectedProject.description}
+                        </td>
                       </tr>
                     </tbody>
                   </table>

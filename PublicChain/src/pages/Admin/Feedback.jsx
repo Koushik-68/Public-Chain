@@ -25,27 +25,23 @@ export default function Feedback() {
   }
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950 text-white">
+    <div className="flex min-h-screen bg-[#f5f6fa] text-gray-900 font-sans">
       <AdminSidebar />
 
-      <div className="flex-1 relative">
-        {/* soft glow backgrounds */}
-        <div className="pointer-events-none absolute -top-10 right-10 h-40 w-40 rounded-full bg-amber-400/25 blur-3xl" />
-        <div className="pointer-events-none absolute bottom-0 left-16 h-52 w-52 rounded-full bg-yellow-500/20 blur-3xl" />
-
-        <div className="flex-1 flex flex-col items-center justify-start pt-16 pb-10">
+      <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col items-center justify-start pt-8 pb-10">
           <div className="w-full max-w-5xl px-4 md:px-8">
             {/* Header */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-6 border-b border-gray-200 pb-3">
               <div className="flex items-center gap-3">
-                <div className="p-3 rounded-2xl bg-amber-500/20 border border-amber-400/60 shadow-lg shadow-amber-500/40">
-                  <FaCommentDots className="text-amber-200 text-2xl" />
+                <div className="p-3 rounded bg-[#0A3A67] text-white flex items-center justify-center">
+                  <FaCommentDots className="text-xl" />
                 </div>
                 <div>
-                  <h2 className="text-2xl md:text-3xl font-extrabold text-amber-100 tracking-wide">
+                  <h2 className="text-2xl md:text-3xl font-semibold text-[#0A3A67]">
                     All Feedbacks ({feedbacks.length})
                   </h2>
-                  <p className="text-xs md:text-sm text-amber-200/80 mt-1">
+                  <p className="text-xs md:text-sm text-gray-600 mt-1">
                     Citizens’ feedback on public projects for transparency and
                     improvement.
                   </p>
@@ -53,7 +49,7 @@ export default function Feedback() {
               </div>
 
               <button
-                className="px-6 md:px-8 py-3 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-600 text-white font-bold shadow-lg hover:scale-105 transition-all border border-yellow-400/60 text-sm md:text-lg inline-flex items-center gap-2"
+                className="px-4 md:px-6 py-2 rounded border border-[#0A3A67] bg-[#0A3A67] text-white text-sm md:text-base font-medium hover:bg-[#0c467f] focus:outline-none inline-flex items-center gap-2"
                 onClick={fetchFeedbacksAdmin}
               >
                 <FaSyncAlt className={loadingFeedbacks ? "animate-spin" : ""} />
@@ -63,23 +59,23 @@ export default function Feedback() {
 
             {/* Content */}
             {loadingFeedbacks ? (
-              <div className="text-center py-10 text-yellow-300 text-lg">
+              <div className="text-center py-10 text-gray-700 text-sm md:text-base">
                 Loading feedbacks...
               </div>
             ) : feedbacks.length === 0 ? (
-              <div className="text-center py-10 text-gray-400 border border-dashed border-gray-600 rounded-2xl bg-slate-900/70">
-                <p className="text-base">No feedbacks found.</p>
+              <div className="text-center py-10 text-gray-600 border border-dashed border-gray-300 rounded bg-white">
+                <p className="text-sm md:text-base">No feedbacks found.</p>
                 <p className="text-xs mt-1 text-gray-500">
                   Once citizens submit feedback on projects, they will appear
                   here.
                 </p>
               </div>
             ) : (
-              <div className="bg-slate-950/80 border border-amber-400/40 rounded-2xl shadow-xl overflow-hidden">
-                <div className="px-6 py-3 border-b border-amber-400/40 flex items-center justify-between">
-                  <span className="text-sm text-amber-100/80">
+              <div className="bg-white border border-gray-200 rounded-md">
+                <div className="px-4 md:px-6 py-3 border-b border-gray-200 flex items-center justify-between text-sm">
+                  <span className="text-gray-700">
                     Total feedbacks:{" "}
-                    <span className="font-bold text-amber-50">
+                    <span className="font-semibold text-[#0A3A67]">
                       {feedbacks.length}
                     </span>
                   </span>
@@ -88,14 +84,22 @@ export default function Feedback() {
                   className="overflow-x-auto"
                   style={{ maxHeight: "70vh", overflowY: "auto" }}
                 >
-                  <table className="w-full text-sm md:text-base text-left border-separate border-spacing-y-2 min-w-[900px] mx-auto">
-                    <thead>
-                      <tr className="bg-amber-900/70 text-amber-100 text-sm md:text-base">
-                        <th className="px-6 py-4 rounded-l-xl">Project</th>
-                        <th className="px-6 py-4">Feedback</th>
-                        <th className="px-6 py-4">Rating</th>
-                        <th className="px-6 py-4">Date</th>
-                        <th className="px-6 py-4 rounded-r-xl text-center">
+                  <table className="w-full text-xs md:text-sm text-left border border-gray-300 border-collapse min-w-[900px] mx-auto">
+                    <thead className="bg-gray-100">
+                      <tr>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Project
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Feedback
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Rating
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300">
+                          Date
+                        </th>
+                        <th className="px-3 md:px-4 py-2 border border-gray-300 text-center">
                           Action
                         </th>
                       </tr>
@@ -104,25 +108,27 @@ export default function Feedback() {
                       {feedbacks.map((f) => (
                         <tr
                           key={f.id}
-                          className="bg-slate-800/80 text-amber-50 hover:bg-amber-900/40 transition-all cursor-pointer"
+                          className="bg-white hover:bg-[#f1f4f8] cursor-pointer"
                           onClick={() => setSelectedFeedback(f)}
                           title="View details"
                         >
-                          <td className="px-6 py-4 font-semibold truncate max-w-[220px]">
+                          <td className="px-3 md:px-4 py-2 border border-gray-300 font-medium truncate max-w-[220px]">
                             {f.project}
                           </td>
-                          <td className="px-6 py-4 truncate max-w-[320px]">
+                          <td className="px-3 md:px-4 py-2 border border-gray-300 truncate max-w-[320px]">
                             {f.feedback}
                           </td>
-                          <td className="px-6 py-4">{f.rating}</td>
-                          <td className="px-6 py-4">
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
+                            {f.rating}
+                          </td>
+                          <td className="px-3 md:px-4 py-2 border border-gray-300">
                             {f.submitted_at &&
                               new Date(f.submitted_at).toLocaleString()}
                           </td>
-                          <td className="px-6 py-4 text-center">
-                            <span className="inline-flex items-center gap-1 text-amber-200">
+                          <td className="px-3 md:px-4 py-2 border border-gray-300 text-center">
+                            <span className="inline-flex items-center gap-1 text-[#0A3A67] text-xs md:text-sm">
                               <FaEye />
-                              <span className="text-xs md:text-sm">View</span>
+                              <span>View</span>
                             </span>
                           </td>
                         </tr>
@@ -136,45 +142,51 @@ export default function Feedback() {
 
           {/* Modal for feedback details */}
           {selectedFeedback && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-              <div className="bg-slate-950 rounded-2xl shadow-2xl p-8 max-w-lg w-full border border-amber-400/40 relative animate-fade-in text-amber-50">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+              <div className="bg-white rounded-md shadow-md p-6 max-w-lg w-full border border-gray-300 relative">
                 <button
-                  className="absolute top-3 right-3 text-amber-200 hover:text-red-400 text-2xl font-bold"
+                  className="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-xl font-bold focus:outline-none"
                   onClick={() => setSelectedFeedback(null)}
                   title="Close"
                 >
                   ×
                 </button>
-                <h2 className="text-xl font-bold text-amber-100 mb-4 text-center flex items-center justify-center gap-2">
-                  <FaCommentDots className="text-amber-300" />
+                <h2 className="text-lg font-semibold text-[#0A3A67] mb-4 text-center flex items-center justify-center gap-2">
+                  <FaCommentDots className="text-gray-700" />
                   Feedback Details
                 </h2>
-                <div className="border border-amber-400/40 rounded-xl p-4 bg-slate-900/80">
-                  <table className="w-full text-xs md:text-sm text-amber-50 border-separate border-spacing-y-2">
+                <div className="border border-gray-200 rounded-md p-4 bg-[#f9fafb]">
+                  <table className="w-full text-xs md:text-sm border-separate border-spacing-y-2">
                     <tbody>
                       <tr>
-                        <td className="font-semibold text-amber-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top w-1/3">
                           Project
                         </td>
-                        <td>{selectedFeedback.project}</td>
+                        <td className="text-gray-700">
+                          {selectedFeedback.project}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-amber-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Feedback
                         </td>
-                        <td>{selectedFeedback.feedback}</td>
+                        <td className="text-gray-700">
+                          {selectedFeedback.feedback}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-amber-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Rating
                         </td>
-                        <td>{selectedFeedback.rating}</td>
+                        <td className="text-gray-700">
+                          {selectedFeedback.rating}
+                        </td>
                       </tr>
                       <tr>
-                        <td className="font-semibold text-amber-200 pr-3">
+                        <td className="font-medium text-gray-800 pr-3 align-top">
                           Date
                         </td>
-                        <td>
+                        <td className="text-gray-700">
                           {selectedFeedback.submitted_at &&
                             new Date(
                               selectedFeedback.submitted_at

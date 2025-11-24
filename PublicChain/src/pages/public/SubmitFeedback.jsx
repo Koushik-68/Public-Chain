@@ -229,7 +229,7 @@ export default function SubmitFeedback() {
           )}
 
           {/* Transparency metrics placeholder */}
-          <div className="mt-12">
+          {/* <div className="mt-12">
             <h3 className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
               <FaChartBar className="text-indigo-400 w-6 h-6" /> Transparency
               Metrics (Sample)
@@ -255,14 +255,14 @@ export default function SubmitFeedback() {
                   Completion Status
                 </div>
                 <div className="font-bold text-indigo-600 text-lg">65%</div>
-              </div>
-              <div className="bg-gradient-to-br from-yellow-50 to-white rounded-2xl shadow-xl p-6 flex flex-col items-center border-2 border-yellow-100">
+              </div> */}
+          {/* <div className="bg-gradient-to-br from-yellow-50 to-white rounded-2xl shadow-xl p-6 flex flex-col items-center border-2 border-yellow-100">
                 <FaUsers className="text-yellow-400 w-6 h-6 mb-2" />
                 <div className="text-sm text-gray-700 mb-2">Public Ratings</div>
                 <div className="font-bold text-yellow-500 text-lg">4.2 / 5</div>
-              </div>
-            </div>
-          </div>
+              </div> */}
+          {/* </div>
+          </div> */}
         </div>
       </main>
     </div>

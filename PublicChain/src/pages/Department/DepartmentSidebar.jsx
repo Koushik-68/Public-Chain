@@ -10,6 +10,7 @@ import {
   IoWalletOutline,
   IoReceiptOutline, // <-- Added new icon here
 } from "react-icons/io5";
+import { useNavigate } from "react-router-dom"; // ✅ added
 
 // Define the primary navigation items
 const navItems = [
@@ -36,13 +37,15 @@ const navItems = [
     label: "All Fund Requests",
   },
   // {
-  //   href: "/department/analytics",
-  //   icon: IoPulseOutline,
-  //   label: "Performance Metrics",
+  //   href: "/department/analytics",
+  //   icon: IoPulseOutline,
+  //   label: "Performance Metrics",
   // },
 ];
 
 export default function DepartmentSidebar() {
+  const navigate = useNavigate(); // ✅ added
+
   // Base class for navigation links
   const linkBaseClasses =
     "flex items-center gap-4 px-4 py-3 rounded-xl transition duration-200 ease-in-out font-medium";
@@ -50,6 +53,12 @@ export default function DepartmentSidebar() {
   // Class for the rich, stylish hover/active state
   const linkHoverClasses =
     "text-white bg-blue-600/20 hover:bg-blue-600/40 border border-transparent hover:border-blue-500/50 transform hover:scale-[1.02]";
+
+  // ✅ same logout logic like DepartmentDashboard
+  function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
 
   return (
     <aside className="w-72 bg-gray-900 border-r border-blue-900 min-h-screen flex flex-col shadow-2xl shadow-blue-900/50">
@@ -78,6 +87,7 @@ export default function DepartmentSidebar() {
       {/* Logout */}
       <div className="p-6 border-t border-blue-900/50">
         <button
+          onClick={handleLogout} // ✅ added
           className={`${linkBaseClasses} w-full justify-start text-red-400 hover:bg-red-900/40 border border-transparent hover:border-red-500/50 font-bold`}
         >
           <IoLogOutOutline className="text-2xl" />

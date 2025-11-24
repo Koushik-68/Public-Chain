@@ -8,9 +8,11 @@ import {
 
 export default function Sidebar({ active = "Dashboard" }) {
   return (
-    <aside className="bg-[#16213E] text-white w-64 min-h-screen flex flex-col py-8 px-4 shadow-xl rounded-r-3xl">
-      <div className="mb-10 flex items-center space-x-3">
-        <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg">
+    <aside className="bg-white border-r border-slate-200 text-slate-900 w-72 min-h-screen flex flex-col py-8 px-5 shadow-sm">
+      {/* Brand / Emblem */}
+      <div className="mb-10 flex items-center gap-3 px-1">
+        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-sky-600 to-indigo-700 flex items-center justify-center shadow-md">
+          {/* --- OLD ORIGINAL SYMBOL RESTORED --- */}
           <svg
             className="w-7 h-7 text-white"
             fill="none"
@@ -25,11 +27,24 @@ export default function Sidebar({ active = "Dashboard" }) {
             />
           </svg>
         </div>
-        <span className="font-bold text-xl tracking-wide text-indigo-200">
-          PublicChain
+
+        <div>
+          <span className="font-semibold text-base text-slate-900 tracking-wide">
+            PublicChain Portal
+          </span>
+          <p className="text-[11px] text-slate-500">
+            Citizen Transparency Dashboard
+          </p>
+        </div>
+      </div>
+
+      <div className="px-1 mb-4">
+        <span className="text-[11px] font-semibold uppercase tracking-widest text-slate-500">
+          Navigation
         </span>
       </div>
-      <nav className="flex flex-col gap-2 mt-4">
+
+      <nav className="flex flex-col gap-2">
         <SidebarButton
           label="Dashboard"
           active={active === "Dashboard"}
@@ -56,6 +71,10 @@ export default function Sidebar({ active = "Dashboard" }) {
           href="/public/blockchain"
         />
       </nav>
+
+      <div className="mt-auto pt-8 px-1 text-[11px] text-slate-500 border-t border-slate-200">
+        Citizen View • Read-only
+      </div>
     </aside>
   );
 }
@@ -63,28 +82,40 @@ export default function Sidebar({ active = "Dashboard" }) {
 function SidebarButton({ label, active, href }) {
   let icon;
   if (label === "Dashboard") {
-    icon = <FaHome className="w-5 h-5 mr-3 text-blue-400" />;
+    icon = <FaHome className="w-5 h-5" />;
   } else if (label === "View All Projects") {
-    icon = <FaFolderOpen className="w-5 h-5 mr-3 text-green-400" />;
+    icon = <FaFolderOpen className="w-5 h-5" />;
   } else if (label === "Track by Location/Dept") {
-    icon = <FaMapMarkedAlt className="w-5 h-5 mr-3 text-indigo-400" />;
+    icon = <FaMapMarkedAlt className="w-5 h-5" />;
   } else if (label === "Submit Feedback") {
-    icon = <FaCommentDots className="w-5 h-5 mr-3 text-yellow-400" />;
+    icon = <FaCommentDots className="w-5 h-5" />;
   } else if (label === "Blockchain Explorer") {
-    icon = <FaLink className="w-5 h-5 mr-3 text-purple-400" />;
+    icon = <FaLink className="w-5 h-5" />;
   }
+
   return (
     <a
       href={href}
-      className={`flex items-center px-4 py-3 rounded-xl font-medium transition-all duration-200 ${
+      className={`flex items-center justify-between px-5 py-4 rounded-xl text-base font-medium transition-all duration-150
+      ${
         active
-          ? "bg-blue-500/30 text-blue-200 shadow-lg scale-105"
-          : "hover:bg-indigo-700/30 text-indigo-200 hover:scale-105"
+          ? "bg-slate-900 text-white shadow-md scale-[1.03]"
+          : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
       }`}
-      style={{ letterSpacing: "0.02em" }}
     >
-      {icon}
-      {label}
+      <span className="flex items-center gap-4">
+        <span className={`${active ? "text-emerald-300" : "text-slate-500"}`}>
+          {icon}
+        </span>
+
+        {label}
+      </span>
+
+      {active && (
+        <span className="text-[10px] uppercase tracking-wider text-emerald-300">
+          Active
+        </span>
+      )}
     </a>
   );
 }

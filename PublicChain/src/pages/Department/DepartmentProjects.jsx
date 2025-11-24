@@ -25,63 +25,82 @@ export default function DepartmentProjects() {
   }, []);
 
   return (
-    <div className="flex min-h-screen bg-slate-950 text-blue-50">
+    <div className="flex min-h-screen bg-gray-100 text-gray-900">
       <DepartmentSidebar />
-      <main className="flex-1 p-8 max-w-6xl mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-blue-100">
+      <main className="flex-1 p-8 max-w-6xl mx-auto bg-white border-l border-gray-200">
+        <h1 className="text-2xl font-semibold mb-6 text-gray-800">
           Department Projects
         </h1>
-        {loading && <div className="mb-4">Loading projects...</div>}
-        {error && <div className="mb-4 text-red-400">{error}</div>}
+
+        {loading && (
+          <div className="mb-4 text-sm text-gray-700">Loading projects...</div>
+        )}
+        {error && (
+          <div className="mb-4 text-sm text-red-700 bg-red-50 border border-red-300 rounded px-3 py-2">
+            {error}
+          </div>
+        )}
+
         {!loading && !error && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.length === 0 ? (
-              <div className="col-span-full text-blue-300">
+              <div className="col-span-full text-sm text-gray-700">
                 No projects found.
               </div>
             ) : (
               projects.map((project) => (
                 <div
                   key={project.id}
-                  className="bg-gray-800 rounded-xl p-5 shadow border border-blue-400/20 cursor-pointer hover:ring-2 hover:ring-blue-400 transition"
+                  className="bg-white rounded-md p-5 shadow-sm border border-gray-200 cursor-pointer hover:border-blue-500 hover:shadow-md transition"
                   onClick={() => setSelectedProject(project)}
                   title="View details"
                 >
-                  <h2 className="text-lg font-semibold text-blue-200 mb-2">
+                  <h2 className="text-lg font-medium text-gray-900 mb-2">
                     {project.project_name}
                   </h2>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Department: {project.department_id}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Department: </span>
+                    {project.department_id}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Type: {project.type}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Type: </span>
+                    {project.type}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Location: {project.location}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Location: </span>
+                    {project.location}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Budget: ₹{project.budget}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Budget: </span>₹
+                    {project.budget}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Officer: {project.officer}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Officer: </span>
+                    {project.officer}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Contact: {project.contact}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Contact: </span>
+                    {project.contact}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Status: {project.status}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Status: </span>
+                    {project.status}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Start: {project.start_date}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Start: </span>
+                    {project.start_date}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    End: {project.end_date}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">End: </span>
+                    {project.end_date}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Blockchain: {project.blockchain_verify === 1 ? "Yes" : "No"}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Blockchain: </span>
+                    {project.blockchain_verify === 1 ? "Yes" : "No"}
                   </div>
-                  <div className="text-xs text-blue-300 mb-1">
-                    Description: {project.description}
+                  <div className="text-xs text-gray-700 mb-1">
+                    <span className="font-semibold">Description: </span>
+                    {project.description}
                   </div>
                 </div>
               ))
@@ -91,68 +110,72 @@ export default function DepartmentProjects() {
 
         {/* Modal for project details */}
         {selectedProject && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60">
-            <div className="bg-gray-900 rounded-2xl shadow-2xl p-8 max-w-lg w-full border border-blue-400/30 relative animate-fade-in">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+            <div className="bg-white rounded-md shadow-xl p-8 max-w-lg w-full border border-gray-300 relative">
               <button
-                className="absolute top-3 right-3 text-blue-200 hover:text-red-400 text-2xl font-bold"
+                className="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-2xl font-bold"
                 onClick={() => setSelectedProject(null)}
                 title="Close"
               >
                 ×
               </button>
-              <h2 className="text-xl font-bold text-blue-100 mb-4 text-center">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 text-center">
                 Project Details
               </h2>
-              <table className="w-full text-sm text-blue-200 border-separate border-spacing-y-2">
+              <table className="w-full text-sm text-gray-800 border-separate border-spacing-y-2">
                 <tbody>
                   <tr>
-                    <td className="font-semibold">Project Name</td>
+                    <td className="font-medium w-1/3 align-top text-gray-700">
+                      Project Name
+                    </td>
                     <td>{selectedProject.project_name}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Department</td>
+                    <td className="font-medium text-gray-700">Department</td>
                     <td>{selectedProject.department_id}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Type</td>
+                    <td className="font-medium text-gray-700">Type</td>
                     <td>{selectedProject.type}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Location</td>
+                    <td className="font-medium text-gray-700">Location</td>
                     <td>{selectedProject.location}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Budget</td>
+                    <td className="font-medium text-gray-700">Budget</td>
                     <td>₹{selectedProject.budget}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Officer</td>
+                    <td className="font-medium text-gray-700">Officer</td>
                     <td>{selectedProject.officer}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Contact</td>
+                    <td className="font-medium text-gray-700">Contact</td>
                     <td>{selectedProject.contact}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Status</td>
+                    <td className="font-medium text-gray-700">Status</td>
                     <td>{selectedProject.status}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Start Date</td>
+                    <td className="font-medium text-gray-700">Start Date</td>
                     <td>{selectedProject.start_date}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">End Date</td>
+                    <td className="font-medium text-gray-700">End Date</td>
                     <td>{selectedProject.end_date}</td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Blockchain Verified</td>
+                    <td className="font-medium text-gray-700">
+                      Blockchain Verified
+                    </td>
                     <td>
                       {selectedProject.blockchain_verify === 1 ? "Yes" : "No"}
                     </td>
                   </tr>
                   <tr>
-                    <td className="font-semibold">Description</td>
+                    <td className="font-medium text-gray-700">Description</td>
                     <td>{selectedProject.description}</td>
                   </tr>
                 </tbody>

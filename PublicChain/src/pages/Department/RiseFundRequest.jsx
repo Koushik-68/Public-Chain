@@ -177,46 +177,45 @@ export default function RiseFundRequest() {
     }
   }
 
-  // --- Utility for Urgency Styling ---
+  // --- Utility for Urgency Styling (simple, govt-like) ---
   const getUrgencyClasses = (level) => {
     switch (level) {
       case "Critical":
-        return "bg-red-500/10 text-red-400 border-red-500/30";
+        return "bg-red-50 text-red-700 border-red-300";
       case "High":
-        return "bg-amber-500/10 text-amber-400 border-amber-500/30";
+        return "bg-amber-50 text-amber-700 border-amber-300";
       case "Normal":
       default:
-        return "bg-indigo-500/10 text-indigo-400 border-indigo-500/30";
+        return "bg-blue-50 text-blue-700 border-blue-300";
     }
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-950 text-slate-50">
+    <div className="flex min-h-screen bg-gray-100 text-gray-900">
       <DepartmentSidebar />
-      <main className="flex-1 p-4 md:p-8">
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-800">
+      <main className="flex-1 p-4 md:p-8 bg-white border-l border-gray-200">
+        <div className="flex items-center justify-between mb-8 pb-4 border-b border-gray-200">
           <div>
-            <h1 className="text-3xl md:text-5xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-300 tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-semibold text-gray-800">
               Rise Fund Request
             </h1>
-
-            <div className="text-sm text-gray-400 mt-1">
-              Create and submit vital funding requests quickly
+            <div className="text-sm text-gray-600 mt-1">
+              Create and submit funding requests for departmental needs.
             </div>
           </div>
 
           <div className="space-x-4 flex items-center">
-            <div className="text-right p-2 rounded-lg bg-gray-800/50 border border-gray-700">
-              <div className="text-xs text-purple-300 font-medium">
+            <div className="text-right p-2 rounded border border-gray-300 bg-gray-50">
+              <div className="text-xs text-gray-600 font-medium">
                 Request ID
               </div>
-              <div className="font-mono font-bold text-base text-cyan-300 tracking-wider">
+              <div className="font-mono font-semibold text-base text-gray-800">
                 {generatedId}
               </div>
             </div>
             <button
               onClick={() => setPreviewOpen(true)}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-semibold shadow-2xl shadow-purple-900/50 hover:from-indigo-700 hover:to-purple-800 transition-all duration-300 flex items-center gap-2"
+              className="px-5 py-2 rounded bg-blue-700 text-white text-sm font-medium hover:bg-blue-800 flex items-center gap-2"
               type="button"
             >
               <Eye size={18} />
@@ -226,8 +225,8 @@ export default function RiseFundRequest() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Form column - Sleek dark card with a subtle glow effect */}
-          <div className="lg:col-span-2 bg-gray-900/70 rounded-3xl p-6 md:p-8 shadow-xl border border-purple-500/20 backdrop-blur-sm">
+          {/* Form column */}
+          <div className="lg:col-span-2 bg-white rounded-md p-6 md:p-8 shadow-sm border border-gray-200">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -238,14 +237,12 @@ export default function RiseFundRequest() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* Department */}
                 <div>
-                  <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                  <label className="text-sm text-gray-800 font-medium mb-2 block">
                     Department
                   </label>
                   <select
-                    className={`w-full rounded-xl px-4 py-3 bg-gray-800 placeholder:text-gray-500 text-white transition-colors focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 border ${
-                      errors.department
-                        ? "border-red-500/50"
-                        : "border-gray-700"
+                    className={`w-full rounded px-3 py-2 bg-white text-sm border focus:outline-none focus:ring-1 focus:ring-blue-600 ${
+                      errors.department ? "border-red-500" : "border-gray-300"
                     }`}
                     value={department}
                     onChange={(e) => setDepartment(e.target.value)}
@@ -259,7 +256,7 @@ export default function RiseFundRequest() {
                     <option value="Transport">Transport</option>
                   </select>
                   {errors.department && (
-                    <div className="text-xs text-red-400 mt-2 flex items-center gap-1">
+                    <div className="text-xs text-red-600 mt-1 flex items-center gap-1">
                       <AlertTriangle size={12} />
                       {errors.department}
                     </div>
@@ -268,42 +265,43 @@ export default function RiseFundRequest() {
 
                 {/* Request Title */}
                 <div>
-                  <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                  <label className="text-sm text-gray-800 font-medium mb-2 block">
                     Request Title
                   </label>
                   <input
-                    className={`w-full rounded-xl px-4 py-3 bg-gray-800 placeholder:text-gray-500 text-white transition-colors focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 border ${
-                      errors.title ? "border-red-500/50" : "border-gray-700"
+                    className={`w-full rounded px-3 py-2 bg-white text-sm border focus:outline-none focus:ring-1 focus:ring-blue-600 ${
+                      errors.title ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Short descriptive title"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                   />
                   {errors.title && (
-                    <div className="text-xs text-red-400 mt-2 flex items-center gap-1">
+                    <div className="text-xs text-red-600 mt-1 flex items-center gap-1">
                       <AlertTriangle size={12} />
                       {errors.title}
                     </div>
                   )}
                 </div>
               </div>
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {/* Amount */}
                 <div className="flex flex-col">
-                  <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                  <label className="text-sm text-gray-800 font-medium mb-2 block">
                     Amount Needed (₹)
                   </label>
                   <input
                     inputMode="numeric"
-                    className={`w-full rounded-xl px-4 py-3 bg-gray-800 placeholder:text-gray-500 text-white font-mono text-lg transition-colors focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 border ${
-                      errors.amount ? "border-red-500/50" : "border-gray-700"
+                    className={`w-full rounded px-3 py-2 bg-white text-sm font-mono border focus:outline-none focus:ring-1 focus:ring-blue-600 ${
+                      errors.amount ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="1,00,000.00"
                     value={amount}
                     onChange={handleAmountChange}
                   />
                   {errors.amount && (
-                    <div className="text-xs text-red-400 mt-2 flex items-center gap-1">
+                    <div className="text-xs text-red-600 mt-1 flex items-center gap-1">
                       <AlertTriangle size={12} />
                       {errors.amount}
                     </div>
@@ -312,13 +310,13 @@ export default function RiseFundRequest() {
 
                 {/* Urgency dropdown */}
                 <div className="flex flex-col">
-                  <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                  <label className="text-sm text-gray-800 font-medium mb-2 block">
                     Urgency Level
                   </label>
                   <select
-                    className={`w-full rounded-xl px-4 py-3 bg-gray-800 transition-colors focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 border ${
-                      errors.urgency ? "border-red-500/50" : "border-gray-700"
-                    } ${getUrgencyClasses(urgency)}`}
+                    className={`w-full rounded px-3 py-2 bg-white text-sm border focus:outline-none focus:ring-1 focus:ring-blue-600 ${getUrgencyClasses(
+                      urgency
+                    )}`}
                     value={urgency}
                     onChange={(e) => setUrgency(e.target.value)}
                   >
@@ -330,60 +328,62 @@ export default function RiseFundRequest() {
 
                 {/* Contact */}
                 <div className="flex flex-col">
-                  <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                  <label className="text-sm text-gray-800 font-medium mb-2 block">
                     Contact Person/Info
                   </label>
                   <input
-                    className={`w-full rounded-xl px-4 py-3 bg-gray-800 placeholder:text-gray-500 text-white transition-colors focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 border ${
-                      errors.contact ? "border-red-500/50" : "border-gray-700"
+                    className={`w-full rounded px-3 py-2 bg-white text-sm border focus:outline-none focus:ring-1 focus:ring-blue-600 ${
+                      errors.contact ? "border-red-500" : "border-gray-300"
                     }`}
                     placeholder="Name / Phone / Email"
                     value={contact}
                     onChange={(e) => setContact(e.target.value)}
                   />
                   {errors.contact && (
-                    <div className="text-xs text-red-400 mt-2 flex items-center gap-1">
+                    <div className="text-xs text-red-600 mt-1 flex items-center gap-1">
                       <AlertTriangle size={12} />
                       {errors.contact}
                     </div>
                   )}
                 </div>
               </div>
+
               <div>
-                <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                <label className="text-sm text-gray-800 font-medium mb-2 block">
                   Reason for Request
                 </label>
                 <textarea
                   rows={5}
-                  className={`w-full rounded-xl px-4 py-3 bg-gray-800 placeholder:text-gray-500 text-white transition-colors focus:ring-2 focus:ring-purple-500 focus:border-purple-500/50 border ${
-                    errors.reason ? "border-red-500/50" : "border-gray-700"
+                  className={`w-full rounded px-3 py-2 bg-white text-sm border focus:outline-none focus:ring-1 focus:ring-blue-600 ${
+                    errors.reason ? "border-red-500" : "border-gray-300"
                   }`}
                   placeholder="Explain what the funds will be used for, timelines, and expected outcomes (minimum 10 characters)."
                   value={reason}
                   onChange={(e) => setReason(e.target.value)}
                 />
                 {errors.reason && (
-                  <div className="text-xs text-red-400 mt-2 flex items-center gap-1">
+                  <div className="text-xs text-red-600 mt-1 flex items-center gap-1">
                     <AlertTriangle size={12} />
                     {errors.reason}
                   </div>
                 )}
               </div>
+
               {/* Attachments */}
               <div>
-                <label className="text-sm text-purple-300 font-semibold mb-2 block">
+                <label className="text-sm text-gray-800 font-medium mb-2 block">
                   Supporting Documents (max 5)
                 </label>
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-3">
                   <button
                     type="button"
                     onClick={openFilePicker}
-                    className="w-fit px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold shadow-md shadow-emerald-900/50 hover:opacity-90 transition-opacity flex items-center gap-2"
+                    className="w-fit px-4 py-2 rounded border border-gray-400 bg-white text-sm text-gray-800 hover:bg-gray-100 flex items-center gap-2"
                   >
                     <Paperclip size={18} />
                     Attach File(s)
                   </button>
-                  <div className="text-sm text-cyan-400 flex items-center gap-2">
+                  <div className="text-sm text-gray-700 flex items-center gap-2">
                     <Paperclip size={14} />
                     {files.length} file(s) attached
                   </div>
@@ -395,26 +395,26 @@ export default function RiseFundRequest() {
                   multiple
                   className="hidden"
                   onChange={handleFilesChange}
-                  accept=".pdf,.doc,.docx,.jpg,.png" // Added file types for better UX
+                  accept=".pdf,.doc,.docx,.jpg,.png"
                 />
 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {files.map((f, i) => (
                     <div
                       key={i}
-                      className="flex items-center justify-between gap-3 bg-gray-800/80 p-3 rounded-xl border border-gray-700 shadow-inner"
+                      className="flex items-center justify-between gap-3 bg-gray-50 p-3 rounded border border-gray-300"
                     >
-                      <div className="truncate text-sm text-gray-200">
+                      <div className="truncate text-sm text-gray-800">
                         {f.name}
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="text-xs text-cyan-400 font-mono">
+                        <div className="text-xs text-gray-600 font-mono">
                           {Math.round(f.size / 1024)} KB
                         </div>
                         <button
                           type="button"
                           onClick={() => removeFile(i)}
-                          className="text-red-500 hover:text-red-400 transition-colors"
+                          className="text-red-600 hover:text-red-700"
                           title="Remove File"
                         >
                           <Trash2 size={16} />
@@ -424,12 +424,12 @@ export default function RiseFundRequest() {
                   ))}
                 </div>
               </div>
-              <div className="flex items-center justify-between pt-4 border-t border-gray-800">
+
+              <div className="flex items-center justify-between pt-4 border-t border-gray-200 flex-wrap gap-3">
                 {/* Left Side: Preview Button */}
                 <button
                   type="submit"
-                  // Use the desired left-side style (e.g., the Save Draft style for prominence)
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-purple-700 text-white font-semibold shadow-2xl shadow-purple-900/50 hover:from-indigo-700 hover:to-purple-800 transition-all duration-300 flex items-center gap-2"
+                  className="px-5 py-2 rounded bg-blue-700 text-white text-sm font-medium hover:bg-blue-800 flex items-center gap-2"
                 >
                   <Eye size={18} />
                   Preview
@@ -453,8 +453,7 @@ export default function RiseFundRequest() {
                     );
                     alert("Draft saved locally.");
                   }}
-                  // Use the desired right-side style (e.g., the less prominent Save Draft style)
-                  className="px-5 py-2 rounded-full bg-gray-700/50 border border-gray-600 text-gray-300 hover:bg-gray-700 transition-colors flex items-center gap-2"
+                  className="px-4 py-2 rounded border border-gray-400 bg-white text-sm text-gray-800 hover:bg-gray-100 flex items-center gap-2"
                 >
                   <Save size={18} />
                   Save Draft
@@ -462,50 +461,48 @@ export default function RiseFundRequest() {
               </div>
             </form>
 
-            <div className="mt-8 text-xs text-gray-500 border-t border-gray-800 pt-4">
+            <div className="mt-6 text-xs text-gray-600 border-t border-gray-200 pt-3">
               *Tip: Documents such as budget estimates, quotes, or photos are
               recommended. Max 5 files.
             </div>
           </div>
 
-          {/* Right column - summary / analytics card (Modern design) */}
-          <div className="bg-gray-900/70 rounded-3xl p-6 md:p-8 shadow-xl border border-cyan-500/20 backdrop-blur-sm h-fit sticky top-8">
-            <h3 className="text-xl font-bold text-cyan-300 border-b border-gray-800 pb-3 mb-4">
+          {/* Right column - summary / analytics card */}
+          <div className="bg-white rounded-md p-6 md:p-8 shadow-sm border border-gray-200 h-fit lg:sticky lg:top-8">
+            <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-3 mb-4">
               Request Overview
             </h3>
-            <div className="space-y-4 text-sm text-gray-200">
-              <div className="p-3 bg-gray-800/60 rounded-xl">
-                <div className="text-xs text-purple-400">Title</div>
+            <div className="space-y-4 text-sm text-gray-800">
+              <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                <div className="text-xs text-gray-600">Title</div>
                 <div className="font-medium mt-1">{title || "—"}</div>
               </div>
-              <div className="p-3 bg-gray-800/60 rounded-xl">
-                <div className="text-xs text-purple-400">Amount</div>
-                <div className="font-medium mt-1 text-lg text-emerald-300">
+              <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                <div className="text-xs text-gray-600">Amount</div>
+                <div className="font-semibold mt-1 text-lg text-gray-900">
                   {amount ? `₹ ${amount}` : "—"}
                 </div>
               </div>
               <div
-                className={`p-3 rounded-xl border-l-4 ${getUrgencyClasses(
-                  urgency
-                )}`}
+                className={`p-3 rounded border ${getUrgencyClasses(urgency)}`}
               >
-                <div className="text-xs text-purple-400">Urgency</div>
-                <div className="font-bold mt-1">{urgency}</div>
+                <div className="text-xs text-gray-700">Urgency</div>
+                <div className="font-semibold mt-1">{urgency}</div>
               </div>
-              <div className="p-3 bg-gray-800/60 rounded-xl">
-                <div className="text-xs text-purple-400">Attachments</div>
+              <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                <div className="text-xs text-gray-600">Attachments</div>
                 <div className="font-medium mt-1">
                   {files.length} file(s) attached
                 </div>
               </div>
-              <div className="p-3 bg-gray-800/60 rounded-xl">
-                <div className="text-xs text-purple-400">Contact</div>
+              <div className="p-3 bg-gray-50 rounded border border-gray-200">
+                <div className="text-xs text-gray-600">Contact</div>
                 <div className="font-medium mt-1">{contact || "—"}</div>
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-gray-800">
-              <h4 className="text-md text-cyan-300 font-semibold mb-4">
+            <div className="mt-6 pt-4 border-t border-gray-200">
+              <h4 className="text-sm text-gray-800 font-semibold mb-3">
                 Quick Actions
               </h4>
               <div className="flex flex-col gap-3">
@@ -514,7 +511,7 @@ export default function RiseFundRequest() {
                     navigator.clipboard?.writeText(generatedId);
                     alert("Copied Request ID");
                   }}
-                  className="px-4 py-2 text-sm rounded-xl bg-gray-800/80 border border-gray-700 text-gray-300 hover:bg-gray-800/50 transition-colors flex items-center justify-center gap-2"
+                  className="px-4 py-2 text-sm rounded border border-gray-400 bg-white text-gray-800 hover:bg-gray-100 flex items-center justify-center gap-2"
                   type="button"
                 >
                   <Copy size={16} />
@@ -532,7 +529,7 @@ export default function RiseFundRequest() {
                     handleAmountChange({ target: { value: "150000" } }); // Manually trigger impact calc
                     alert("Filled with sample values");
                   }}
-                  className="px-4 py-2 text-sm rounded-xl bg-gray-800/80 border border-purple-500/30 text-purple-300 hover:bg-purple-900/30 transition-colors flex items-center justify-center gap-2"
+                  className="px-4 py-2 text-sm rounded border border-gray-400 bg-white text-gray-800 hover:bg-gray-100 flex items-center justify-center gap-2"
                   type="button"
                 >
                   <Zap size={16} />
@@ -551,7 +548,7 @@ export default function RiseFundRequest() {
                     setImpactEstimate("");
                     alert("Draft cleared");
                   }}
-                  className="px-4 py-2 text-sm rounded-xl bg-gray-800/80 border border-red-500/30 text-red-400 hover:bg-red-900/30 transition-colors flex items-center justify-center gap-2"
+                  className="px-4 py-2 text-sm rounded border border-red-400 bg-white text-red-700 hover:bg-red-50 flex items-center justify-center gap-2"
                   type="button"
                 >
                   <Trash2 size={16} />
@@ -562,27 +559,27 @@ export default function RiseFundRequest() {
           </div>
         </div>
 
-        {/* Preview Modal - Enhanced Dark/Glassmorphic Style */}
+        {/* Preview Modal */}
         {previewOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/80 backdrop-blur-sm">
-            <div className="bg-gray-900/95 rounded-3xl p-6 md:p-8 max-w-4xl w-full shadow-2xl border border-cyan-400/30 animate-in fade-in-5 zoom-in-95">
-              <div className="flex items-start justify-between pb-4 border-b border-gray-800">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-6 bg-black/40">
+            <div className="bg-white rounded-md p-6 md:p-8 max-w-4xl w-full shadow-xl border border-gray-300">
+              <div className="flex items-start justify-between pb-4 border-b border-gray-200">
                 <div>
-                  <h2 className="text-3xl font-bold text-cyan-300 tracking-tight">
+                  <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
                     Review & Submit
                   </h2>
-                  <div className="text-sm text-gray-400 mt-1">
+                  <div className="text-sm text-gray-600 mt-1">
                     Confirm all details are correct before final submission.
                   </div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
-                  <div className="text-xs text-purple-300">Request ID</div>
-                  <div className="font-mono font-bold text-lg text-cyan-300">
+                  <div className="text-xs text-gray-600">Request ID</div>
+                  <div className="font-mono font-semibold text-base text-gray-800">
                     {generatedId}
                   </div>
                   <button
                     onClick={() => setPreviewOpen(false)}
-                    className="text-2xl text-gray-400 hover:text-white transition-colors mt-2"
+                    className="text-2xl text-gray-500 hover:text-gray-800 mt-1"
                     type="button"
                   >
                     &times;
@@ -592,10 +589,10 @@ export default function RiseFundRequest() {
 
               <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-purple-300">
+                  <h3 className="text-sm font-semibold text-gray-800">
                     Key Details
                   </h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
                     <DetailItem title="Department" value={department} />
                     <DetailItem
                       title="Urgency"
@@ -610,46 +607,46 @@ export default function RiseFundRequest() {
                     <DetailItem
                       title="Amount"
                       value={amount ? `₹ ${amount}` : "—"}
-                      customClass="text-emerald-300 font-bold"
+                      customClass="text-gray-900 font-semibold"
                     />
                     <DetailItem title="Contact" value={contact} />
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-purple-300">
+                  <h3 className="text-sm font-semibold text-gray-800">
                     Reason & Attachments
                   </h3>
                   <div className="mt-4">
-                    <div className="text-xs text-gray-400">Reason</div>
-                    <div className="bg-gray-800/40 p-4 rounded-xl mt-2 text-sm text-gray-200 border border-gray-700/50 min-h-[100px] whitespace-pre-wrap">
+                    <div className="text-xs text-gray-600">Reason</div>
+                    <div className="bg-gray-50 p-3 rounded border border-gray-200 mt-1 text-sm text-gray-800 min-h-[100px] whitespace-pre-wrap">
                       {reason || "—"}
                     </div>
                   </div>
 
                   <div className="mt-6">
-                    <div className="text-xs text-gray-400">Attachments</div>
-                    <div className="mt-2 grid grid-cols-1 gap-2">
+                    <div className="text-xs text-gray-600">Attachments</div>
+                    <div className="mt-2 grid grid-cols-1 gap-2 text-sm">
                       {files.length ? (
                         files.map((f, i) => (
                           <div
                             key={i}
-                            className="flex items-center justify-between bg-gray-800/60 p-3 rounded-lg border border-gray-700/50"
+                            className="flex items-center justify-between bg-gray-50 p-3 rounded border border-gray-200"
                           >
-                            <div className="truncate text-sm font-medium text-gray-200">
+                            <div className="truncate font-medium text-gray-800">
                               <Paperclip
                                 size={14}
-                                className="inline mr-2 text-cyan-400"
+                                className="inline mr-2 text-gray-600"
                               />
                               {f.name}
                             </div>
-                            <div className="text-xs text-cyan-400 font-mono">
+                            <div className="text-xs text-gray-600 font-mono">
                               {Math.round(f.size / 1024)} KB
                             </div>
                           </div>
                         ))
                       ) : (
-                        <div className="text-sm text-gray-500 p-3 bg-gray-800/30 rounded-lg">
+                        <div className="text-sm text-gray-600 p-3 bg-gray-50 rounded border border-gray-200">
                           No supporting documents attached.
                         </div>
                       )}
@@ -658,10 +655,10 @@ export default function RiseFundRequest() {
                 </div>
               </div>
 
-              <div className="mt-8 flex items-center justify-between pt-4 border-t border-gray-800">
+              <div className="mt-8 flex items-center justify-between pt-4 border-t border-gray-200">
                 <button
                   onClick={() => setPreviewOpen(false)}
-                  className="px-5 py-2 rounded-full bg-gray-700/50 border border-gray-600 text-gray-300 hover:bg-gray-700 transition-colors flex items-center gap-2"
+                  className="px-4 py-2 rounded border border-gray-400 bg-white text-sm text-gray-800 hover:bg-gray-100 flex items-center gap-2"
                   type="button"
                 >
                   Edit Request
@@ -669,7 +666,7 @@ export default function RiseFundRequest() {
                 <button
                   onClick={submitRequest}
                   disabled={submitting}
-                  className="px-6 py-3 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-600 text-white font-semibold shadow-2xl shadow-emerald-900/50 hover:from-emerald-600 hover:to-cyan-700 transition-all duration-300 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="px-5 py-2 rounded bg-green-700 text-white text-sm font-medium hover:bg-green-800 flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   type="button"
                 >
                   <Send size={18} />
@@ -687,8 +684,8 @@ export default function RiseFundRequest() {
 // Reusable component for the Modal's detail display
 const DetailItem = ({ title, value, customClass = "", colSpan = "" }) => (
   <div className={`${colSpan}`}>
-    <div className="text-xs text-gray-400">{title}</div>
-    <div className={`font-medium mt-1 text-gray-200 ${customClass}`}>
+    <div className="text-xs text-gray-600">{title}</div>
+    <div className={`font-medium mt-1 text-gray-800 ${customClass}`}>
       {value || "—"}
     </div>
   </div>
