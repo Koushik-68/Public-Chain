@@ -24,6 +24,10 @@ export default function PublicBlockchain() {
   const [loadingVerify, setLoadingVerify] = useState(true);
   const [error, setError] = useState(null);
 
+  // NEW: modal states
+  const [selectedBlock, setSelectedBlock] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   // Fetch blockchain chain
   useEffect(() => {
     async function fetchChain() {
@@ -112,8 +116,14 @@ export default function PublicBlockchain() {
     <FaUnlink className="w-3.5 h-3.5 text-rose-600" />
   );
 
+  // Derived values for modal
+  const selectedFund = selectedBlock?.fund_data || {};
+  const selectedIndex = selectedBlock
+    ? chain.findIndex((b) => b.id === selectedBlock.id)
+    : -1;
+
   return (
-    <div className="min-h-screen w-full flex flex-row bg-[#f4f6fb]">
+    <div className="min-h-screen w-full flex flex-row bg-[#f4f6fb] scroll-smooth">
       <Sidebar active="Blockchain Explorer" />
 
       <main className="flex-1 flex flex-col items-center justify-start py-10 px-4 md:px-10">
@@ -225,7 +235,7 @@ export default function PublicBlockchain() {
                 transaction will appear here as a chained block.
               </div>
             ) : (
-              <div className="relative flex flex-col md:flex-row gap-8 md:gap-10 max-h-[70vh] overflow-y-auto pr-2">
+              <div className="min-h-screen w-full flex flex-row bg-[#f4f6fb] scroll-smooth">
                 {/* legend (desktop) */}
                 <div className="hidden md:flex flex-col gap-3 pt-2 min-w-[160px] text-xs text-gray-600">
                   <div className="flex items-center gap-2">
@@ -256,7 +266,14 @@ export default function PublicBlockchain() {
                       const isLast = index === chain.length - 1;
 
                       return (
-                        <div key={block.id} className="relative pl-10">
+                        <div
+                          key={block.id}
+                          className="relative pl-10 cursor-pointer"
+                          onClick={() => {
+                            setSelectedBlock(block);
+                            setShowModal(true);
+                          }}
+                        >
                           {/* Chain node circle */}
                           <div
                             className={`absolute left-3 top-7 w-6 h-6 rounded-full flex items-center justify-center shadow-md ${
@@ -375,6 +392,131 @@ export default function PublicBlockchain() {
           </section>
         </div>
       </main>
+
+      {/* MODAL for block details */}
+      {showModal && selectedBlock && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-xl max-w-2xl w-full mx-4 max-h-[80vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between px-4 py-3 border-b">
+              <div>
+                <h3 className="font-semibold text-lg text-gray-800">
+                  Block Details
+                </h3>
+                <p className="text-xs text-gray-500">
+                  Click outside or on × to close
+                </p>
+              </div>
+              <button
+                className="text-gray-500 hover:text-gray-800 text-2xl leading-none px-2"
+                onClick={() => setShowModal(false)}
+              >
+                &times;
+              </button>
+            </div>
+
+            <div className="p-4 overflow-auto max-h-[60vh]">
+              <table className="w-full text-sm border-collapse">
+                <tbody>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700 w-40">
+                      Block Number
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {selectedIndex >= 0 ? selectedIndex + 1 : "-"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Department
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {selectedFund.department || "Unknown Department"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Title
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {selectedFund.title || "Untitled Fund Release"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Reason
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {selectedFund.reason || "Not provided"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Urgency
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {selectedFund.urgency || "Not specified"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Amount
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      ₹{formatAmount(selectedFund.amount)}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Contact
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {selectedFund.contact || "Not provided"}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Timestamp
+                    </td>
+                    <td className="py-2 text-gray-800">
+                      {formatDateTime(selectedBlock.timestamp)}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Block Hash
+                    </td>
+                    <td className="py-2 text-gray-800 break-all">
+                      {selectedBlock.block_hash}
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Previous Hash
+                    </td>
+                    <td className="py-2 text-gray-800 break-all">
+                      {selectedBlock.prev_hash || "None (Genesis Block)"}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="font-semibold py-2 pr-4 text-gray-700">
+                      Signature
+                    </td>
+                    <td className="py-2 text-gray-800 break-all">
+                      {selectedBlock.signature}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

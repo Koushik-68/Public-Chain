@@ -16,6 +16,9 @@ import FundRequests from "./pages/Admin/FundRequests";
 import Feedback from "./pages/Admin/Feedback";
 import PendingRegistrations from "./pages/Admin/PendingRegistrations";
 import PublicBlockchain from "./pages/public/PublicBlockchain";
+import GovernmentDashboard from "./pages/Government/GovernmentDashboard";
+import FundRelease from "./pages/Government/FundRelease";
+import GovernmentProjects from "./pages/Government/GovernmentProjects";
 
 import "./index.css";
 import Admin from "./pages/Admin/Admin";
@@ -96,6 +99,15 @@ function App() {
             <Route
               path="/department/view-all-fund-requests"
               element={<ViewAllFundRequests />}
+            />
+            <Route
+              path="/government/dashboard"
+              element={<GovernmentDashboard />}
+            />
+            <Route path="/government/fund-release" element={<FundRelease />} />
+            <Route
+              path="/government/government-projects"
+              element={<GovernmentProjects />}
             />
             <Route path="/" element={<Login />} />
           </Routes>

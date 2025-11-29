@@ -17,7 +17,11 @@ export default function Login() {
       const res = await api.post("/api/login", { identifier, password, role });
       const { token } = res.data;
       localStorage.setItem("token", token);
-      navigate("/dashboard");
+      if (role === "government") {
+        navigate("/government/dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }

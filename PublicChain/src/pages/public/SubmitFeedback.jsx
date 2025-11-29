@@ -67,7 +67,7 @@ export default function SubmitFeedback() {
   }
 
   return (
-    <div className="min-h-screen w-full flex flex-row bg-gradient-to-br from-[#e9eafc] to-[#f3f6ff]">
+    <div className="min-h-screen w-full flex flex-row bg-gradient-to-br from-[#e9eafc] to-[#f3f6ff] scroll-smooth">
       <Sidebar active="Submit Feedback" />
       <main className="flex-1 flex flex-col items-center justify-start py-12 px-8">
         <div className="w-full max-w-xl">
@@ -163,7 +163,7 @@ export default function SubmitFeedback() {
           {/* Feedbacks Modal */}
           {showFeedbacks && (
             <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-              <div className="bg-white text-gray-800 rounded-2xl shadow-2xl p-8 max-w-2xl w-full relative">
+              <div className="bg-white text-gray-800 rounded-2xl shadow-2xl p-8 max-w-2xl w-full relative max-h-[80vh] overflow-y-auto scroll-smooth">
                 <button
                   className="absolute top-4 right-4 text-xl text-gray-500 hover:text-red-500"
                   onClick={() => setShowFeedbacks(false)}
@@ -184,7 +184,7 @@ export default function SubmitFeedback() {
                     No feedbacks found.
                   </div>
                 ) : (
-                  <div className="overflow-x-auto">
+                  <div className="overflow-x-auto scroll-smooth">
                     <table className="min-w-full border border-blue-200 rounded-xl text-sm text-gray-800">
                       <thead className="bg-blue-50">
                         <tr>
@@ -227,42 +227,6 @@ export default function SubmitFeedback() {
               </div>
             </div>
           )}
-
-          {/* Transparency metrics placeholder */}
-          {/* <div className="mt-12">
-            <h3 className="text-2xl font-bold text-indigo-700 mb-6 flex items-center gap-2">
-              <FaChartBar className="text-indigo-400 w-6 h-6" /> Transparency
-              Metrics (Sample)
-            </h3>
-            <div className="grid grid-cols-2 gap-8">
-              <div className="bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-xl p-6 flex flex-col items-center border-2 border-blue-100">
-                <FaCalendarAlt className="text-blue-400 w-6 h-6 mb-2" />
-                <div className="text-sm text-gray-700 mb-2">
-                  Project Timeline
-                </div>
-                <div className="font-bold text-blue-600 text-lg">18 months</div>
-              </div>
-              <div className="bg-gradient-to-br from-green-50 to-white rounded-2xl shadow-xl p-6 flex flex-col items-center border-2 border-green-100">
-                <FaMoneyBillWave className="text-green-400 w-6 h-6 mb-2" />
-                <div className="text-sm text-gray-700 mb-2">Fund Usage</div>
-                <div className="font-bold text-green-600 text-lg">
-                  4634 Cr/5000 Cr
-                </div>
-              </div>
-              <div className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl shadow-xl p-6 flex flex-col items-center border-2 border-indigo-100">
-                <FaChartBar className="text-indigo-400 w-6 h-6 mb-2" />
-                <div className="text-sm text-gray-700 mb-2">
-                  Completion Status
-                </div>
-                <div className="font-bold text-indigo-600 text-lg">65%</div>
-              </div> */}
-          {/* <div className="bg-gradient-to-br from-yellow-50 to-white rounded-2xl shadow-xl p-6 flex flex-col items-center border-2 border-yellow-100">
-                <FaUsers className="text-yellow-400 w-6 h-6 mb-2" />
-                <div className="text-sm text-gray-700 mb-2">Public Ratings</div>
-                <div className="font-bold text-yellow-500 text-lg">4.2 / 5</div>
-              </div> */}
-          {/* </div>
-          </div> */}
         </div>
       </main>
     </div>
